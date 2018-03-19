@@ -8,9 +8,9 @@ import java.io.File;
 
 public class DamAVLApp {
   
-  private static BinarySearchTree <DamData> bst = new BinarySearchTree <DamDat
+  private static AVLTree <DamData> avl = new AVLTree <DamData> ();
   private static Scanner inputStream = null;
-     
+       
   public static void main ( String [] args ) {
     
     try {
@@ -29,25 +29,38 @@ public class DamAVLApp {
     inputStream.nextLine();
     
     while ( inputStream.hasNextLine() ) {
-        
-              while (inputStream.hasNextLine()) {
-                       line = inputStream.nextLine();  
-                                
-                                         String[] rawdata = line.split(",");
-                                                  
-                                                           if (rawdata.length >= 26) {
-                                                                       bst.insert(
-                                                                                      new DamData(rawdata[2], rawdata[10], rawdata[25]));
-                                                                                               }
-                                                                                                        else if ((rawdata.length >= 11)
-                                                                                                                    && (rawdata.length < 26)) { 
-                                                                                                                                bst.insert(
-                                                                                                                                               new DamData(rawdata[2], rawdata[10], null));
-                                                                                                                                                        }
-                                                                                                                                                                 else if (rawdata.length < 11){
-                                                                                                                                                                             bst.insert(new DamData(rawdata[2], null, null));
-                                                                                                                                                                                      }    
-                                                                                                                                                                                            }  
+	line = inputStream.nextLine();
+
+        if (rawdata.length >= 26) {
+            avl.insert(
+               new DamData(rawdata[2], rawdata[10], rawdata[25]));
+         }
+         else if ((rawdata.length >= 11)
+            && (rawdata.length < 26)) {
+             avl.insert(
+               new DamData(rawdata[2], rawdata[10], ""));
+         }
+         else if (rawdata.length < 11){
+            avl.insert(new DamData(rawdata[2], "", ""));                                                                                               }
     }
-  }
+    
+     if (args.length != 0) {
+         StringBuilder builder = new StringBuilder();
+         for (String s: args) {
+            if (builder.length() > 0) {
+               builder.append(" ");
+            }
+            builder.append(s);
+         }
+         printDam(builder.toString().trim());
+      }
+      else {
+         printAllDams();
+      }
+
+
+  } // END OF MAIN
+
+  	
+
 }
