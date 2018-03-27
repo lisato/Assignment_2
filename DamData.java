@@ -56,6 +56,7 @@ public class DamData implements Comparable <DamData> {
    
    /**
     * Set the dam name to damName
+    * @param damName name of the dam
     */
    public void setDamName(String damName) {
       this.damName = damName;
@@ -63,6 +64,7 @@ public class DamData implements Comparable <DamData> {
    
    /**
     * Set the fsc to fsc
+    * @param fsc the dams fsc
     */
    public void setFSC(String fsc) {
       this.fsc = fsc;
@@ -70,6 +72,7 @@ public class DamData implements Comparable <DamData> {
    
    /**
     * Set the dam level to damLevel
+    * @param  damLevel the names water level
     */
    public void setDamLevel(String damLevel) {
       this.damLevel = damLevel;

@@ -1,7 +1,9 @@
-// Hussein's Binary Tree
-// 26 March 2017
-// Hussein Suleman
-
+/**
+ * An object of this class represents a Binary Tree data structure 
+ * @author Hussein Suleman
+ * @since 26 March 2017
+ * @param <dataType> Any class type
+ */
 public class BinaryTree<dataType>
 {
    BinaryTreeNode<dataType> root;
@@ -11,10 +13,19 @@ public class BinaryTree<dataType>
       root = null;
    }
    
+   /**
+    * This subroutine obtains the height of the binary tree
+    * @return Height of tree
+    */
    public int getHeight ()
    {
       return getHeight (root);
-   }   
+   } 
+   /**
+    * This subroutine obtains the height of the binary tree starting at the given node
+    * @param node Starting point or node of the tree
+    * @return Height of the tree
+    */
    public int getHeight ( BinaryTreeNode<dataType> node )
    {
       if (node == null)
@@ -22,11 +33,20 @@ public class BinaryTree<dataType>
       else
          return 1 + Math.max (getHeight (node.getLeft ()), getHeight (node.getRight ()));
    }
-   
+   /**
+    * This subroutine obtains the size of the binary tree
+    * @return Size of the tree
+    */
    public int getSize ()
    {
       return getSize (root);
-   }   
+   } 
+   
+   /**
+    * This subroutine obtains the size of the binary tree starting at the given node
+    * @param node Starting point or node of the tree
+    * @return Size of the tree
+    */
    public int getSize ( BinaryTreeNode<dataType> node )
    {
       if (node == null)
@@ -35,15 +55,26 @@ public class BinaryTree<dataType>
          return 1 + getSize (node.getLeft ()) + getSize (node.getRight ());
    }
    
+   /**
+    * This subroutine print the data at the given node
+    * @param node Node data to be printed 
+    */
    public void visit ( BinaryTreeNode<dataType> node )
    {
       System.out.println (node.data);
    }
    
+   /**
+    * This subroutine prints the contents of the binary tree in pre-order format
+    */
    public void preOrder ()
    {
       preOrder (root);
    }
+   /**
+    * This subroutine prints the contents of the binary tree in pre-order format starting at the given node
+    * @param node Starting point of printing
+    */
    public void preOrder ( BinaryTreeNode<dataType> node )
    {
       if (node != null)
@@ -53,11 +84,18 @@ public class BinaryTree<dataType>
          preOrder (node.getRight ());
       }   
    }
-
+   
+   /**
+    * This subroutine prints the contents of the binary tree in post-order format
+    */
    public void postOrder ()
    {
       postOrder (root);
    }
+   /**
+    * This subroutine prints the contents of the binary tree in post-order format starting at the given node
+    * @param node Starting point of printing
+    */
    public void postOrder ( BinaryTreeNode<dataType> node )
    {
       if (node != null)
@@ -67,11 +105,18 @@ public class BinaryTree<dataType>
          visit (node);
       }   
    }
-
+   
+   /**
+    * This subroutine prints the contents of the binary tree in in-order format
+    */
    public void inOrder ()
    {
       inOrder (root);
    }
+   /**
+    * This subroutine prints the contents of the binary tree in in-order format starting at the given node
+    * @param node Starting point of printing
+    */
    public void inOrder ( BinaryTreeNode<dataType> node )
    {
       if (node != null)
@@ -81,7 +126,10 @@ public class BinaryTree<dataType>
          inOrder (node.getRight ());
       }   
    }
-
+   
+   /**
+    * This subroutine prints the contents of the binary tree in level-order format
+    */
    public void levelOrder ()
    {
       if (root == null)

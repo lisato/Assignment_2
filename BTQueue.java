@@ -1,7 +1,9 @@
-// Hussein's Binary Tree
-// 26 March 2017
-// Hussein Suleman
-
+/**
+ * An object of this class represents a queue data structure 
+ * @author Hussein Suleman
+ * @since 26 March 2017
+ * @param <dataType> Any class type
+ */
 public class BTQueue<dataType>
 {   
    BTQueueNode<dataType> head;
@@ -13,6 +15,10 @@ public class BTQueue<dataType>
       tail = null;
    }
    
+   /**
+    * This subroutine obtains the next node in queue
+    * @return return the next node in queue
+    */
    public BinaryTreeNode<dataType> getNext ()
    {
       if (head == null)
@@ -24,6 +30,10 @@ public class BTQueue<dataType>
       return qnode.node;
    }
    
+   /**
+    * This subroutine creates a queue
+    * @param node Starting with the given node
+    */
    public void enQueue ( BinaryTreeNode<dataType> node )
    {
       if (tail == null)

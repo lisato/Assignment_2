@@ -5,24 +5,43 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.File;
+//DamAVLApp class
+//
+//******************PUBLIC OPERATIONS*********************
+//Comparable find( x ) --> Return item that matches x
+//void printOpCount( x ) --> print results of counts from insert
+//						  --> & search method
+//void printDam( x ) --> Find x in BST if found print; 
+//					  --> else print dam not found 
+//void printAllDams( ) --> print all dam data to stdout
 
+/**
+ * This class is implementation for the user interface. 
+ * This class scans data from the dam database and 
+ * stores it in a AVL tree to perform some operations. 
+ * @author Oyama Plati
+ */
 public class DamAVLApp {
   
   private static AVLTree <DamData> avl = new AVLTree <DamData> ();
   private static Scanner inputStream = null;
-  private static int opCount = 0;
+  private static int searchCounter = 0;
 
   public static void main ( String [] args ) {
     
     try {
-      inputStream = new Scanner(
-         new FileInputStream(
-         	(new File("Dam_Levels_Individual_Nov2015-Mar2016.csv")).getAbsolutePath()));
+      
+    	File file = new File("Dam_Levels_Individual_Nov2015-Mar2016-1.csv");
+    	boolean perms = file.setReadable(true, false);
+    
+    	if (perms)
+    		inputStream = new Scanner(new FileInputStream(file.getAbsoluteFile()));
     }
     catch (FileNotFoundException e) {
       e.printStackTrace();
-      System.out.println("FAIL!! : File does not exist");
+      System.out.println("File does not exist");
       System.out.println(" or could not be open.");
+      System.exit(0);
     }
     
     String line = null;
@@ -60,19 +79,32 @@ public class DamAVLApp {
       else {
          printAllDams();
       }
+  
+  inputStream.close();
   } // END OF MAIN
-
+  
+  /**
+   * This subroutine prints all dam data
+   */
   public static void printAllDams () {
      avl.treeOrder();
-     printOpCount("Without any parameters ",opCount);
-  }
+     printOpCount(searchCounter, AVLTree.insertCounter);
+  } // END OF PRINTALLDAMS
   
-   private static void printOpCount (String cases, int count) {
-      PrintWriter outputStream = null;
+  /**
+   * This subroutine prints all dam data
+   * @param searchcount Search method count
+   * @param insertcount Insert method count
+   */
+  private static void printOpCount (int searchcount, int insertcount) {
+      PrintWriter outputStreamSearch = null;
+      PrintWriter outputStreamInsert = null;
       
       try {
-         outputStream = new PrintWriter (
-                              new FileWriter("OpAVLReport.dat", true));
+         outputStreamSearch = new PrintWriter (
+                              new FileWriter("OpAVLSearchReport.dat", true));
+         outputStreamInsert = new PrintWriter(
+	 	 	      new FileWriter("OpAVLInsertReport.dat", true));
       }
       catch (FileNotFoundException e0) {
          e0.printStackTrace();
@@ -84,33 +116,43 @@ public class DamAVLApp {
          System.exit(0);
       }
       
-      outputStream.println(cases + ", " + count);
+      outputStreamSearch.println(Integer.toString(searchcount));
+      outputStreamInsert.println(Integer.toString(insertcount));
       
-      outputStream.close();
-   }   
+      outputStreamSearch.close();
+      outputStreamInsert.close();
+   }// END OF printOpCounter 
 
-
+  /**
+   * This subroutine finds x in BST if found print dam data; else print dam not found
+   * @param damName Name of dam to be search for in the tree and printed
+   */
    public static void printDam (String damName) {
       BinaryTreeNode <DamData> result = find (damName);
       if (result == null) {
-         printOpCount("Unknown dam name", opCount);
+    	  printOpCount(searchCounter, AVLTree.insertCounter);
          System.out.println("Dam not found");
       }
       else {
-         printOpCount("Known dam name", opCount);
+    	  printOpCount(searchCounter, AVLTree.insertCounter);
          System.out.println(result.data); 
       }  
-   }
-  
+   } // END OF PRINTDAM
+   
+   /**
+    * This subroutine returns the item that matches name
+    * @param name Name of dam to be search for in the tree
+    * @return item that matches name
+    */
    private static BinaryTreeNode<DamData> find (String name) {
       return find (avl.root, name);   
-   }
+   } // END OF FIND
 
    private static BinaryTreeNode<DamData> find 
                (BinaryTreeNode <DamData> t, String name) {
       BinaryTreeNode <DamData> result = null;
       if (t != null) { 
-         opCount++;
+         searchCounter++;
          if (name.equals(t.data.getDamName().trim())) { 
             return t;
          }
@@ -125,5 +167,5 @@ public class DamAVLApp {
       else {
          return null;
       }
-   }
-}
+   } // END OF FIND
+} // END OF DAMAVLAPP CLASS

@@ -6,6 +6,7 @@
 #
 
 JFLAGS = -g
+JCPATH = -d
 JC = javac
 
 
