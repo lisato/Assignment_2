@@ -1,3 +1,30 @@
+JFLAGS = -g
+JCPATH = -d
+JC = javac
 
+
+
+.SUFFIXES: .java .class
+
+
+
+.java.class:
+	 $(JC) $(JFLAGS) $*.java
+
+
+
+CLASSES =  \ DamData.java \  DuplicateItemException.java \  BinaryNode.java \  BinarySearchTree.java \  DamBSTApp.java \ BinaryTreeNode.java \ BinaryTree.java \ BTQueueNode.java \ BTQueue.java \ AVLTree.java \ DamAVLApp.java
+
+
+
+default: classes
+
+
+
+classes: $(CLASSES:.java=.class)
+
+
+clean:
+	 $(RM) *.class
 
 	
